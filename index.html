@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋游戏</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(135deg, #ff7e5f, #feb47b);
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            color: #333;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        .double-player-mode {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .ai-mode {
+            background-color: #2196F3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>五子棋</h1>
+        <button class="double-player-mode" onclick="window.location.href='double/double.html'">双人模式</button>
+        <button class="ai-mode" onclick="window.location.href='ai/ai.html'">AI模式</button>
+    </div>
+</body>
+</html>
+
+
+

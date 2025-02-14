@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .goban {
+            position: relative;
+            width: 560px;
+            height: 560px;
+            background-color: #d2b48c;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .line {
+            position: absolute;
+            background-color: black;
+        }
+
+        .horizontal-line {
+            width: 100%;
+            height: 1px;
+        }
+
+        .vertical-line {
+            width: 1px;
+            height: 100%;
+        }
+
+        .stone {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        #text {
+            text-align: center;
+            position: absolute;
+            top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="text">现在是black方回合</span>
+    <div class="goban" id="goban"></div>
+
+    <script>
+        const goban = document.getElementById('goban');
+        const gridSize = 14;
+        const cellSize = 40; // 棋盘格子大小
+        const color = ["black", "white"]
+        const dir = [[-1, -1], [0, -1], [1, -1], [1, 0]]
+        var flag = 0;
+
+        // 创建水平线条
+        for (let i = 0; i <= gridSize; i++) {
+            const line = document.createElement('div');
+            line.classList.add('line', 'horizontal-line');
+            line.style.top = `${i * cellSize}px`;
+            goban.appendChild(line);
+        }
+
+        // 创建垂直线条
+        for (let i = 0; i <= gridSize; i++) {
+            const line = document.createElement('div');
+            line.classList.add('line', 'vertical-line');
+            line.style.left = `${i * cellSize}px`;
+            goban.appendChild(line);
+        }
+
+        for (let y = 0; y < gridSize; y++) {
+            for (let x = 0; x < gridSize; x++) {
+                const gridPoint = document.createElement('div');
+                gridPoint.style.position = 'absolute';
+                gridPoint.style.left = `${x * cellSize - 15}px`;
+                gridPoint.style.top = `${y * cellSize - 15}px`;
+                gridPoint.id = `${x}${y}`; // 设置id为坐标组合
+                gridPoint.style.backgroundColor = 'transparent'; // 背景透明
+                gridPoint.classList.add("stone")
+                gridPoint.setAttribute("onclick", `gridClicked(${x},${y})`)
+                gridPoint.setAttribute("col", "tran");
+                goban.appendChild(gridPoint);
+            }
+        }
+
+        function c(x, y) {
+            return document.getElementById(`${x}${y}`);
+        }
+
+        function gridClicked(x, y) {
+            placeStone(x, y, color[flag % 2]);
+            document.getElementById("text").innerHTML = "现在是" + color[(flag + 1) % 2] + "方回合";
+            flag += 1;
+            c(x, y).removeAttribute("onclick")
+            var result = detect()
+            if (result != 0) {
+                alert(result + "方赢得胜利!")
+            }
+        }
+
+        // 放置示例棋子
+        function placeStone(x, y, color) {
+            c(x, y).style.backgroundColor = color;
+            c(x, y).setAttribute("col", color)
+        }
+
+        function findColor(x, y) {
+            return c(x, y).getAttribute("col");
+            console.log(c(x, y).getAttribute("col"))
+        }
+
+        // 示例：放置两颗棋子
+        // placeStone(7, 7, 'black'); // 黑色棋子放在中心
+        // placeStone(8, 8, 'white'); // 白色棋子放在中心右侧下方
+        // console.log(findColor(8,8))
+
+        function detect() {
+            var fcol = "";
+            outloop: for (var i = 0; i < gridSize; i++) {
+                for (var j = 0; j < gridSize; j++) {
+                    if (findColor(i, j) == "tran") {
+                        continue;
+                    }
+                    for (var k = 0; k < dir.length; k++) {
+                        var tdir = dir[k];
+                        var col = findColor(i, j)
+                        var tempi = 0;
+                        var m = i, n = j;
+                        for (var t = 0; t < 4; t++) {
+                            m += tdir[0]; n += tdir[1];
+                            if (m < 0 || n < 0) {
+                                break;
+                            }
+                            if (findColor(m, n) == col) {
+                                tempi = t;
+                            } else {
+                                break;
+                            }
+                        }
+                        if (tempi == 3) {
+                            fcol = col;
+                            break outloop;
+                        }
+                    }
+                }
+            }
+
+            if (fcol != "") {
+                return fcol;
+            } else {
+                return 0;
+            }
+        }
+    </script>
+</body>
+
+</html>
