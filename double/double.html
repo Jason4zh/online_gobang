@@ -66,7 +66,6 @@
         const dir = [[-1, -1], [0, -1], [1, -1], [1, 0]]
         var flag = 0;
 
-        // 创建水平线条
         for (let i = 0; i <= gridSize; i++) {
             const line = document.createElement('div');
             line.classList.add('line', 'horizontal-line');
@@ -74,7 +73,6 @@
             goban.appendChild(line);
         }
 
-        // 创建垂直线条
         for (let i = 0; i <= gridSize; i++) {
             const line = document.createElement('div');
             line.classList.add('line', 'vertical-line');
@@ -88,8 +86,8 @@
                 gridPoint.style.position = 'absolute';
                 gridPoint.style.left = `${x * cellSize - 15}px`;
                 gridPoint.style.top = `${y * cellSize - 15}px`;
-                gridPoint.id = `${x}${y}`; // 设置id为坐标组合
-                gridPoint.style.backgroundColor = 'transparent'; // 背景透明
+                gridPoint.id = `${x}${y}`;
+                gridPoint.style.backgroundColor = 'transparent';
                 gridPoint.classList.add("stone")
                 gridPoint.setAttribute("onclick", `gridClicked(${x},${y})`)
                 gridPoint.setAttribute("col", "tran");
@@ -109,6 +107,7 @@
             var result = detect()
             if (result != 0) {
                 alert(result + "方赢得胜利!")
+                window.location.reload()
             }
         }
 
@@ -122,12 +121,7 @@
             return c(x, y).getAttribute("col");
             console.log(c(x, y).getAttribute("col"))
         }
-
-        // 示例：放置两颗棋子
-        // placeStone(7, 7, 'black'); // 黑色棋子放在中心
-        // placeStone(8, 8, 'white'); // 白色棋子放在中心右侧下方
-        // console.log(findColor(8,8))
-
+        
         function detect() {
             var fcol = "";
             outloop: for (var i = 0; i < gridSize; i++) {
