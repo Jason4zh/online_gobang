@@ -88,8 +88,8 @@
             goban.appendChild(line);
         }
 
-        for (let y = 0; y < gridSize; y++) {
-            for (let x = 0; x < gridSize; x++) {
+        for (let y = 0; y <= gridSize; y++) {
+            for (let x = 0; x <= gridSize; x++) {
                 const gridPoint = document.createElement('div');
                 gridPoint.style.position = 'absolute';
                 gridPoint.style.left = `${x * cellSize - 15}px`;
@@ -204,7 +204,7 @@
                     Authorization: 'Bearer sk-iysspznbiomjccbkyrkzjcnorqyvuazhldmykzxzqrlcmrtl',
                     'Content-Type': 'application/json'
                 },
-                body: '{"model":"Qwen/Qwen2.5-7B-Instruct","messages":[{"role":"user","content":"' + ques + '"}],"stream":false,"max_tokens":2048,"stop":["null"],"temperature":0.7,"top_p":0.7,"top_k":50,"frequency_penalty":0.5,"n":1,"response_format":{"type":"text"}}'
+                body: '{"model":"THUDM/GLM-4-9B-0414","messages":[{"role":"user","content":"' + ques + '"}],"stream":false,"max_tokens":2048,"stop":["null"],"temperature":0.7,"top_p":0.7,"top_k":50,"frequency_penalty":0.5,"n":1,"response_format":{"type":"text"}}'
             };
 
             fetch('https://api.siliconflow.cn/v1/chat/completions', options)
@@ -237,3 +237,4 @@
 </body>
 
 </html>
+
