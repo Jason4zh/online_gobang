@@ -80,8 +80,8 @@
             goban.appendChild(line);
         }
 
-        for (let y = 0; y < gridSize; y++) {
-            for (let x = 0; x < gridSize; x++) {
+        for (let y = 0; y <= gridSize; y++) {
+            for (let x = 0; x <= gridSize; x++) {
                 const gridPoint = document.createElement('div');
                 gridPoint.style.position = 'absolute';
                 gridPoint.style.left = `${x * cellSize - 15}px`;
@@ -163,3 +163,4 @@
 </body>
 
 </html>
+
