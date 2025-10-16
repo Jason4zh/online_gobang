@@ -195,7 +195,7 @@
 
         function askai(content) {
             console.log(content)
-            var ques = '现在请你作为白方处理这个五子棋局，棋盘左上角为(0,0)，右下角为(14,14)，用户是黑棋，你是白旗，这是棋局之前的每一步棋（提示，这个字符串由，符号分隔，每一个区域内容分别为：横坐标,纵坐标,颜色）：' + "，" + content.join("|") + "|" + '现在到你了，请问你将把棋子落在哪里？请以坐标的形式(x,y)直接输出，如(8,6)，不需要任何其他的内容，不要空格，不要标注颜色，不要下在已有坐标上'
+            var ques = '现在请你作为白方处理这个五子棋局，棋盘左上角为(0,0)，右下角为(14,14)，用户是黑棋，你是白旗，这是棋局之前的每一步棋（提示，这个字符串由，符号分隔，每一个区域内容分别为：横坐标,纵坐标,颜色）：' + "，" + content.join("，") + "，" + '先深度理解五子棋的规则和一般策略，现在到你了，作为白方，请问你将把棋子落在哪里？请以坐标的形式(x,y)直接输出，如(8,6)，请慎重考虑后再进行落子，尽可能为白方争取胜利，不需要任何其他的内容，不要空格，不要标注颜色，不要下在已有坐标上'
             console.log(ques);
 
             const options = {
@@ -204,7 +204,7 @@
                     Authorization: 'Bearer sk-iysspznbiomjccbkyrkzjcnorqyvuazhldmykzxzqrlcmrtl',
                     'Content-Type': 'application/json'
                 },
-                body: '{"model":"THUDM/GLM-4-9B-0414","messages":[{"role":"user","content":"' + ques + '"}],"stream":false,"max_tokens":2048,"stop":["null"],"temperature":0.7,"top_p":0.7,"top_k":50,"frequency_penalty":0.5,"n":1,"response_format":{"type":"text"}}'
+                body: '{"model":"Qwen/Qwen3-8B","messages":[{"role":"user","content":"' + ques + '"}],"stream":false,"max_tokens":2048,"stop":["null"],"temperature":0.7,"top_p":0.7,"top_k":50,"frequency_penalty":0.5,"n":1,"response_format":{"type":"text"}}'
             };
 
             fetch('https://api.siliconflow.cn/v1/chat/completions', options)
@@ -213,6 +213,7 @@
                 .catch(err => console.error(err));
 
             function output(cont) {
+	
                 const regex = /\((\d+),(\d+)\)/;
 
                 ifclick(true)
