@@ -195,7 +195,7 @@
 
         function askai(content) {
             console.log(content)
-            var ques = '现在请你作为白方处理这个五子棋局，棋盘左上角为(0,0)，右下角为(14,14)，用户是黑棋，你是白旗，这是棋局之前的每一步棋（提示，这个字符串由，符号分隔，每一个区域内容分别为：横坐标,纵坐标,颜色）：' + "，" + content.join("，") + "，" + '先深度理解五子棋的规则和一般策略，现在到你了，作为白方，请问你将把棋子落在哪里？请以坐标的形式(x,y)直接输出，如(8,6)，请慎重考虑后再进行落子，尽可能为白方争取胜利，不需要任何其他的内容，不要空格，不要标注颜色，不要下在已有坐标上'
+            var ques = 'Now, please handle this five-point chess game as the white side. The top left corner of the board is (0,0), and the bottom right corner is (14,14). The user is the black side, and you are the white flag. These are each move before the game (hint, this string is from; Symbol separation, each area content is respectively: horizontal coordinate, vertical coordinate, color)' + "," + content.join(";") + "," + 'First, deeply understand the rules and general strategies of Gobang. Now it's your turn. As the white side, may I ask where you will place your pieces? Please output directly in the form of coordinates (x,y), such as (8,6). Please consider carefully before placing your pieces. Try your best to win for the white side. No other content is needed. Do not use Spaces, do not mark colors, and do not place on existing coordinates.'
             console.log(ques);
 
             const options = {
@@ -238,5 +238,6 @@
 </body>
 
 </html>
+
 
 
