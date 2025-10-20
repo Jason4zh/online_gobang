@@ -195,7 +195,7 @@
 
         function askai(content) {
             console.log(content)
-            var ques = 'Now, please handle this five-point chess game as the white side. The top left corner of the board is (0,0), and the bottom right corner is (14,14). The user is the black side, and you are the white flag. These are each move before the game (hint, this string is from; Symbol separation, each area content is respectively: horizontal coordinate, vertical coordinate, color)' + "," + content.join(";") + "," + 'First, deeply understand the rules and general strategies of Gobang. Now it's your turn. As the white side, may I ask where you will place your pieces? Please output directly in the form of coordinates (x,y), such as (8,6). Please consider carefully before placing your pieces. Try your best to win for the white side. No other content is needed. Do not use Spaces, do not mark colors, and do not place on existing coordinates.'
+            var ques = 'Try to keep the thinking time within 10 seconds.Now, please handle this five-point chess game as the white side. The top left corner of the board is (0,0), and the bottom right corner is (14,14). The user is the black side, and you are the white flag. These are each move before the game (hint, this string is from; Symbol separation, each area content is respectively: horizontal coordinate, vertical coordinate, color)' + "," + content.join(";") + "," + 'First, deeply understand the rules and general strategies of Gobang. Now it is your turn. As the white side, may I ask where you will place your pieces? Please output directly in the form of coordinates (x,y), such as (8,6). Please consider carefully before placing your pieces. Try your best to win for the white side. No other content is needed. Do not use Spaces, do not mark colors, and do not place on existing coordinates.'
             console.log(ques);
 
             const options = {
@@ -204,7 +204,7 @@
                     Authorization: 'Bearer sk-iysspznbiomjccbkyrkzjcnorqyvuazhldmykzxzqrlcmrtl',
                     'Content-Type': 'application/json'
                 },
-                body: '{"model":"Qwen/Qwen3-8B","messages":[{"role":"user","content":"' + ques + '"}],"stream":false,"max_tokens":2048,"stop":["null"],"temperature":0.7,"top_p":0.7,"top_k":50,"frequency_penalty":0.5,"n":1,"response_format":{"type":"text"}}'
+                body: '{"model":"Qwen/Qwen3-8B","messages":[{"role":"user","content":"' + ques + '"}],"stream":false,"max_tokens":2048,"enable_thinking":true,"stop":["null"],"temperature":0.7,"top_p":0.7,"top_k":50,"frequency_penalty":0.5,"n":1,"response_format":{"type":"text"}}'
             };
 
             fetch('https://api.siliconflow.cn/v1/chat/completions', options)
